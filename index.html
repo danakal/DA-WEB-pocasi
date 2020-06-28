@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Počasí</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link href="css/weather-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+  <h1>Počasí</h1>
+  
+
+  <!-- tlačítka pro výběr města - bonusová část úkolu -->
+  
+  <div class="button-group">
+    <button class="button" onclick="domu()"><i class="fas fa-map-marker-alt"></i></button>
+    <button class="button" onclick="Praha()">Praha</button>
+    <button class="button" onclick="Brno()">Brno</button>
+    <button class="button" onclick="Ostrava()">Ostrava</button>
+  </div>
+  
+
+
+  <div class="weather">
+ 
+    <div class="weather__current">
+      <h2 class="weather__city" id="mesto">
+        -- 
+      </h2> 
+
+      <div class="weather__inner weather__inner--center">
+        <div class="weather__section weather__section--temp">
+          <span class="weather__temp-value" id="teplota">--</span>
+          <span class="weather__temp-unit">°C</span>
+          <div class="weather__description" id="popis">--</div>
+        </div>
+        <div class="weather__section weather__section--icon" id="ikona">
+          --
+        </div>
+      </div>
+
+      <div class="weather__inner">
+        <div class="weather__section">
+          <h3 class="weather__title">Vítr</h3>
+          <div class="weather__value">
+            <span id="vitr">--</span> m/s 
+          </div>
+        </div>
+        <div class="weather__section">
+          <h3 class="weather__title">Vlhkost</h3>
+          <div class="weather__value">
+            <span id="vlhkost">--</span> %
+          </div>
+        </div>
+      </div>
+
+      <div class="weather__inner">
+        <div class="weather__section">
+          <h3 class="weather__title">Východ slunce</h3>
+          <div class="weather__value">
+            <span id="vychod">--</span>
+          </div>
+        </div>
+        <div class="weather__section">
+          <h3 class="weather__title">Západ slunce</h3>
+          <div class="weather__value">
+            <span id="zapad">--</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="weather__forecast" id="predpoved">
+
+      <!--
+        do tohoto divu vygeneruj HTML pro jednotlivé dny předpovědi
+        podle následující šablony
+      -->
+
+      <!--
+      <div class="forecast"> 
+        <div class="forecast__day">Pondělí 22. 4.</div>
+        <div class="forecast__icon">
+          <i class="wi wi-owm-night-602"></i>
+        </div>
+        <div class="forecast__temp">18 °C</div>
+      </div>
+      -->
+
+    </div>
+
+  </div>
+
+
+
+  <!--
+    JS soubor s funkcí pro konverzi ikonky na hezčí verzi (viz. zadání úkolu).
+    Odkomentuj řádek níže, chceš-li je použít.
+  -->
+  <script src="weather-icons.js"></script> 
+
+  <!-- JS soubor s naším programem -->
+  <script src="index.js"></script>
+
+</body>
+</html>
