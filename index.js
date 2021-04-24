@@ -107,8 +107,8 @@ function Praha() {
   fetchCesta =
     "https://api.openweathermap.org/data/2.5/onecall?lat=50.0847&lon=14.4215&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
   nactiMisto();
-  const pozadi = document.querySelector("body");
-  pozadi.style.background = "url(images/praha.jpg) center/cover no-repeat";
+  document.querySelector("body").style.background =
+    "url(images/praha.jpg) center/cover no-repeat";
 }
 
 function Brno() {
@@ -116,8 +116,8 @@ function Brno() {
   fetchCesta =
     "https://api.openweathermap.org/data/2.5/onecall?lat=49.20&lon=16.61&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
   nactiMisto();
-  const pozadi = document.querySelector("body");
-  pozadi.style.background = "url(images/brno.jpg) center/cover no-repeat";
+  document.querySelector("body").style.background =
+    "url(images/brno.jpg) center/cover no-repeat";
 }
 
 function Ostrava() {
@@ -125,16 +125,16 @@ function Ostrava() {
   fetchCesta =
     "https://api.openweathermap.org/data/2.5/onecall?lat=49.83&lon=18.26&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
   nactiMisto();
-  const pozadi = document.querySelector("body");
-  pozadi.style.background = "url(images/ostrava.jfif) center/cover no-repeat";
+  document.querySelector("body").style.background =
+    "url(images/ostrava.jfif) center/cover no-repeat";
 }
 
 function domu() {
   mesto = "Home";
   fetchCesta = `https://api.openweathermap.org/data/2.5/onecall?lat=${homeCoords.latitude}&lon=${homeCoords.longitude}&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d`;
   nactiMisto();
-  const pozadi = document.querySelector("body");
-  pozadi.style.background = "url(images/straznice.jpg) center/cover no-repeat";
+  document.querySelector("body").style.background =
+    "url(images/straznice.jpg) center/cover no-repeat";
 }
 
 //přepočet timeUNIX na něco normálního
