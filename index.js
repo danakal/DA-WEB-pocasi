@@ -1,7 +1,9 @@
 "use strict";
 
-let mesto = "Home";
-let fetchCesta, homeCoords;
+let mesto, homeCoords;
+//základní cesta k API vč. klíče, přidávají se souřadnice
+const fetchBase =
+  "https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
 
 // zjištění polohy home, pokud nejde, nastaví se Strážnice
 
@@ -26,13 +28,14 @@ const getHomeCoords = async function () {
 
 //vykreslení počasí pro home/Strážnici po spuštění
 getHomeCoords().then((coords) => {
-  fetchCesta = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d`;
+  let fetchPath = fetchBase + `&lat=${coords.latitude}&lon=${coords.longitude}`;
   homeCoords = coords;
-  nactiMisto();
+  mesto = "Home";
+  nactiMisto(fetchPath);
 });
 
-function nactiMisto() {
-  fetch(fetchCesta)
+function nactiMisto(fetchPath) {
+  fetch(fetchPath)
     .then((response) => response.json())
     .then(zobrazPocasi)
     .catch((err) => {
@@ -104,35 +107,33 @@ function zobrazPocasi(data) {
 
 function Praha() {
   mesto = "Praha";
-  fetchCesta =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=50.0847&lon=14.4215&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
-  nactiMisto();
+  const fetchPath = fetchBase + "&lat=50.0847&lon=14.4215";
+  nactiMisto(fetchPath);
   document.querySelector("body").style.background =
     "url(images/praha.jpg) center/cover no-repeat";
 }
 
 function Brno() {
   mesto = "Brno";
-  fetchCesta =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=49.20&lon=16.61&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
-  nactiMisto();
+  const fetchPath = fetchBase + "&lat=49.20&lon=16.61";
+  nactiMisto(fetchPath);
   document.querySelector("body").style.background =
     "url(images/brno.jpg) center/cover no-repeat";
 }
 
 function Ostrava() {
   mesto = "Ostrava";
-  fetchCesta =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=49.83&lon=18.26&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d";
-  nactiMisto();
+  const fetchPath = fetchBase + "&lat=49.83&lon=18.26";
+  nactiMisto(fetchPath);
   document.querySelector("body").style.background =
     "url(images/ostrava.jfif) center/cover no-repeat";
 }
 
 function domu() {
   mesto = "Home";
-  fetchCesta = `https://api.openweathermap.org/data/2.5/onecall?lat=${homeCoords.latitude}&lon=${homeCoords.longitude}&exclude=minutely,hourly&units=metric&lang=cz&appid=55e696532f166939726049f05dfb145d`;
-  nactiMisto();
+  const fetchPath =
+    fetchBase + `&lat=${homeCoords.latitude}&lon=${homeCoords.longitude}`;
+  nactiMisto(fetchPath);
   document.querySelector("body").style.background =
     "url(images/straznice.jpg) center/cover no-repeat";
 }
