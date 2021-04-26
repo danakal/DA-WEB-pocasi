@@ -1,16 +1,6 @@
 "use strict";
 
 let mesto = "Home";
-let datum, hodiny, minuty, datumKolikateho, datumMesic, denVtydnu;
-const dnyCesky = [
-  "Neděle",
-  "Pondělí",
-  "Úterý",
-  "Středa",
-  "Čtvrtek",
-  "Pátek",
-  "Sobota",
-];
 let fetchCesta, homeCoords;
 
 // zjištění polohy home, pokud nejde, nastaví se Strážnice
@@ -51,6 +41,7 @@ function nactiMisto() {
 }
 
 function zobrazPocasi(data) {
+  //předpověď počasí - data z API
   document.querySelector("#teplota").textContent = Math.round(
     data.current.temp
   );
@@ -62,10 +53,10 @@ function zobrazPocasi(data) {
   );
   document.querySelector("#mesto").textContent = mesto;
 
-  getNormalTime(data.current.sunrise);
-  document.querySelector("#vychod").textContent = `${hodiny}:${minuty}`;
-  getNormalTime(data.current.sunset);
-  document.querySelector("#zapad").textContent = `${hodiny}:${minuty}`;
+  let cas = getNormalTime(data.current.sunrise);
+  document.querySelector("#vychod").textContent = `${cas.hodiny}:${cas.minuty}`;
+  cas = getNormalTime(data.current.sunset);
+  document.querySelector("#zapad").textContent = `${cas.hodiny}:${cas.minuty}`;
 
   //ikony
   let novaIkona = getWeatherIcon(
@@ -77,9 +68,18 @@ function zobrazPocasi(data) {
   // předpověď na 4 dny - tvorba HTML
 
   let predpovedHtml = "";
-
+  const dnyCesky = [
+    "Neděle",
+    "Pondělí",
+    "Úterý",
+    "Středa",
+    "Čtvrtek",
+    "Pátek",
+    "Sobota",
+  ];
   for (let i = 1; i < 5; i++) {
-    getNormalTime(data.daily[i].dt);
+    const datum = getNormalTime(data.daily[i].dt);
+    const { denVtydnu, datumKolikateho, datumMesic } = datum;
 
     let ikona = getWeatherIcon(
       data.daily[i].weather[0].id,
@@ -137,15 +137,16 @@ function domu() {
     "url(images/straznice.jpg) center/cover no-repeat";
 }
 
-//přepočet timeUNIX na něco normálního
+//pomocná funkce na přepočet timeUNIX na potřebné hodnoty
 function getNormalTime(timeUnix) {
-  datum = new Date(timeUnix * 1000);
-  hodiny = datum.getHours();
-  minuty = datum.getMinutes();
+  const datum = new Date(timeUnix * 1000);
+  const hodiny = datum.getHours();
+  let minuty = datum.getMinutes();
   if (minuty < 10) minuty = "0" + minuty;
-  denVtydnu = datum.getDay();
-  datumKolikateho = datum.getDate();
-  datumMesic = datum.getMonth();
+  const denVtydnu = datum.getDay();
+  const datumKolikateho = datum.getDate();
+  const datumMesic = datum.getMonth();
+  return { hodiny, minuty, denVtydnu, datumKolikateho, datumMesic };
 }
 
 //hezčí ikony až do konce
